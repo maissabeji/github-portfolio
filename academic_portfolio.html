@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maissa Beji - Academic Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #FFFFFF;
+            border: 2px solid #EE2A35;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(238, 42, 53, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #EE2A35;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #000000;
+        }
+
+        .projects-section {
+            background: #FFFFFF;
+            border: 2px solid #009736;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 151, 54, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #009736;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #EE2A35;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card:hover::before {
+            background: #009736;
+            transform: translateX(0);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #000000;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #EE2A35;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #009736;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #EE2A35;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #009736;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #EE2A35;
+            border: 1px solid #EE2A35;
+        }
+
+        .btn-secondary:hover {
+            background: #EE2A35;
+            color: #FFFFFF;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-project-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #EE2A35;
+            border: none;
+            color: #FFFFFF;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(238, 42, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .add-project-btn:hover {
+            background: #009736;
+            transform: scale(1.1);
+        }
+
+        .add-project-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #FFFFFF;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #EE2A35;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -20px;
+        }
+
+        .close:hover {
+            color: #009736;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EE2A35;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #009736;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Maissa Beji</h1>
+            <p class="subtitle"> Portfolio</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <span>maissa.beji@imt-atlantique.net</span>
+                        <span>maissabeji.imt@gmail.com</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>🎓</span>
+                    <span>Télécom Paris | IMT Atlantique </span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Paris, France</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="projects-section">
+            <h2 class="section-title"> Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Sample Project 1 -->
+                <div class="project-card">
+                    <h3 class="project-title">Quantum Kernel Methods for Anomaly Detection</h3>
+                    <div class="project-meta">
+                        <span>📅 Feb-Aug 2025</span>
+                        <span>🏫 Multiverse Computing</span>
+                    </div>
+                    <p class="project-description">
+                       Explored quantum kernel methods for network traffic anomaly detection using Randomized Measurement and Projected Quantum Kernel approaches. Implemented unsupervised learning techniques with feature engineering (variance filtering, clustering, PCA) and evaluated performance using F1-score benchmarks. Developed software engineering practices and presentation skills through team collaboration and consortium meetings.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Quantum kernels</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Machine learning</span>
+                        <span class="tag">Data encoding</span>
+                        <span class="tag">Anomaly detection</span>
+                        <span class="tag">Qiskit</span>
+                        <span class="tag">Scikit-learn</span>
+                    
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/quantum_kernel_methods/Intership_Report_Maissa_BEJI.pdf" class="btn btn-primary">📄 View Report</a>
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/quantum_kernel_methods/report_presentation.pdf" class="btn btn-secondary">🖼️ View presentation</a>
+                    </div>
+                </div>
+
+                <!-- Sample Project 2 -->
+                <div class="project-card">
+                    <h3 class="project-title">Maximal Intrinsic Randomness of a Quantum State</h3>
+                    <div class="project-meta">
+                        <span>📅 Oct 2024 - Jan 2025 </span>
+                        <span>🏫 Télécom Paris</span>
+                    </div>
+                    <p class="project-description">
+                        Investigated quantum intrinsic randomness for cryptography, focusing on POVM decomposition and stability under measurement imperfections. Derived tighter bounds on randomness extraction, analyzed adversarial scenarios, and identified trade-offs between optimality and robustness. Applied convex optimization, entropy analysis, and Python simulations to support applications in QKD and QRNG.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Quantum Intrinsic Randomness</span>
+                        <span class="tag">POVM Decomposition</span>
+                        <span class="tag">Extremal Rank-1 Projectors</span>
+                        <span class="tag">Convex Optimization</span>
+                        <span class="tag">Entropy Analysis</span>
+                        <span class="tag">Python Simulations</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/Maximal_intrinsic_randomness/PRIM_Report_Maissa_BEJI.pdf" class="btn btn-primary">📄 View Report</a>
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/Maximal_intrinsic_randomness/Presentation.pdf" class="btn btn-secondary">🖼️ View presentation</a>
+                       
+                    </div>
+                </div>
+
+                <!-- Sample Project 3 -->
+                <div class="project-card">
+                    <h3 class="project-title">Motion Compensation with Event-Based Cameras</h3>
+                    <div class="project-meta">
+                        <span>📅  Apr-Aug 2024</span>
+                        <span>🏫 Prophesee</span>
+                    </div>
+                    <p class="project-description">
+                       Developed methods to compensate motion in event-camera data to enhance spatial resolution. Implemented approaches with and without prior knowledge of motion plane using SVD-based plane estimation and velocity mapping. Applied techniques to industrial barcode reconstruction through thresholding, peak detection, and probabilistic modeling. Explored luminance generation for grayscale image reconstruction.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Event-Based Cameras</span>
+                        <span class="tag">Motion Compensation</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Probabilistic Modeling</span>
+                        <span class="tag">SVD</span>
+                        <span class="tag">High Temporal Resolution</span>
+                        <span class="tag">ImGui</span>
+
+                    </div>
+                    <div class="project-links">
+                        
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/motion_compensation/final_pres_motion_compensation.pdf" class="btn btn-primary">🖼️ View Presentation</a>
+                        
+                    </div>
+                </div>
+                <!-- Sample Project 4 -->
+                <div class="project-card">
+                    <h3 class="project-title">3D Segmentation of Liver Vascular Network using Deep Learning</h3>
+                    <div class="project-meta">
+                        <span>📅  Oct 2023- Jan 2024</span>
+                        <span>🏫 IMT Atlantique</span>
+                    </div>
+                    <p class="project-description">
+                       Implemented convolutional neural networks (UNet, UNetR) to segment liver vascular structures from 3D CT scans. Compared model performance with adjusted loss functions (Dice Loss) to improve segmentation accuracy. Achieved promising Dice scores while addressing challenges of GPU constraints and training time. Applied results to support surgical planning and liver surgery safety.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">3D Segmentation</span>
+                        <span class="tag">Medical Imaging</span>
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">UNet / UNetR</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">Dice Loss</span>
+                        <span class="tag">Pytorch</span>
+                        
+
+                    </div>
+                    <div class="project-links">
+                        
+                        <a href="https://github.com/maissabeji/github-portfolio/blob/main/3D_segmentation/Poster_Recherche_BEJI_Monot.png" class="btn btn-primary">🖼️ View Poster</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add Project Button -->
+    <button class="add-project-btn" onclick="openModal()">+</button>
+
+    <!-- Modal for Adding New Project -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Project</h2>
+            <form id="projectForm" onsubmit="addProject(event)">
+                <div class="form-group">
+                    <label for="projectTitle">Project Title</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectSemester">Semester</label>
+                    <input type="text" id="projectSemester" placeholder="e.g., Fall 2023" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectCourse">Course</label>
+                    <input type="text" id="projectCourse" placeholder="e.g., CS 4820" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <textarea id="projectDescription" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectTags">Tags (comma-separated)</label>
+                    <input type="text" id="projectTags" placeholder="Python, Machine Learning, Data Science">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reportLink">Report Link</label>
+                    <input type="url" id="reportLink" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="posterLink">Poster Link</label>
+                    <input type="url" id="posterLink" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codeLink">Code/Demo Link</label>
+                    <input type="url" id="codeLink" placeholder="https://...">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Project</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Projects data storage
+        let projects = JSON.parse(localStorage.getItem('academicProjects')) || [];
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('projectModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.getElementById('projectForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Add new project
+        function addProject(event) {
+            event.preventDefault();
+            
+            const project = {
+                id: Date.now(),
+                title: document.getElementById('projectTitle').value,
+                semester: document.getElementById('projectSemester').value,
+                course: document.getElementById('projectCourse').value,
+                description: document.getElementById('projectDescription').value,
+                tags: document.getElementById('projectTags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+                reportLink: document.getElementById('reportLink').value,
+                posterLink: document.getElementById('posterLink').value,
+                codeLink: document.getElementById('codeLink').value
+            };
+            
+            projects.push(project);
+            localStorage.setItem('academicProjects', JSON.stringify(projects));
+            
+            renderProjects();
+            closeModal();
+        }
+
+        // Render projects
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
+            const dynamicProjects = projects.map(project => createProjectCard(project)).join('');
+            
+            // Keep the sample projects and add new ones
+            const sampleProjects = grid.innerHTML;
+            grid.innerHTML = sampleProjects + dynamicProjects;
+        }
+
+        // Create project card HTML
+        function createProjectCard(project) {
+            const tagsHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            
+            let linksHTML = '';
+            if (project.reportLink) linksHTML += `<a href="${project.reportLink}" class="btn btn-primary" target="_blank">📄 View Report</a>`;
+            if (project.posterLink) linksHTML += `<a href="${project.posterLink}" class="btn btn-secondary" target="_blank">🖼️ View Poster</a>`;
+            if (project.codeLink) linksHTML += `<a href="${project.codeLink}" class="btn btn-secondary" target="_blank">💻 Code</a>`;
+            
+            return `
+                <div class="project-card">
+                    <h3 class="project-title">${project.title}</h3>
+                    <div class="project-meta">
+                        <span>📅 ${project.semester}</span>
+                        <span>🏫 ${project.course}</span>
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tags">${tagsHTML}</div>
+                    <div class="project-links">${linksHTML}</div>
+                    <button onclick="deleteProject(${project.id})" style="position: absolute; top: 10px; right: 10px; background: #EE2A35; color: #FFFFFF; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 0.8rem;">×</button>
+                </div>
+            `;
+        }
+
+        // Delete project
+        function deleteProject(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                projects = projects.filter(project => project.id !== id);
+                localStorage.setItem('academicProjects', JSON.stringify(projects));
+                renderProjects();
+            }
+        }
+
+        // Load projects on page load
+        document.addEventListener('DOMContentLoaded', renderProjects);
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
