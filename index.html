@@ -1,322 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maissa Beji - Academic Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maissa Beji - Academic Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      margin: 0;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #000000;
-            background: #FFFFFF;
-            min-height: 100vh;
-        }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    header {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      position: relative;
+    }
 
-        header {
-            background: #FFFFFF;
-            border: 2px solid #EE2A35;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(238, 42, 53, 0.1);
-        }
+    header h1 {
+      font-size: 2.8rem;
+      color: #dc2626;
+    }
 
-        h1 {
-            font-size: 3rem;
-            color: #EE2A35;
-            margin-bottom: 10px;
-        }
+    .subtitle {
+      font-size: 1.2rem;
+      margin: 10px 0 20px 0;
+    }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #000000;
-            margin-bottom: 20px;
-        }
+    .translate-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
+    .translate-btn:hover {
+      background: #1d4ed8;
+    }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #000000;
-        }
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        .projects-section {
-            background: #FFFFFF;
-            border: 2px solid #009736;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 151, 54, 0.1);
-        }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #009736;
-        }
+    .projects-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #16a34a;
+    }
 
-        .project-card {
-            background: #FFFFFF;
-            border: 1px solid #000000;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .project-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+      background: #fafafa;
+    }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #EE2A35;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
 
-        .project-card:hover::before {
-            background: #009736;
-            transform: translateX(0);
-        }
+    .project-meta {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 15px;
+    }
 
-        .project-title {
-            font-size: 1.5rem;
-            color: #000000;
-            margin-bottom: 15px;
-        }
+    .project-description {
+      margin-bottom: 15px;
+    }
 
-        .project-description {
-            color: #000000;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
 
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #EE2A35;
-        }
+    .tag {
+      background: #16a34a;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-right: 10px;
+      transition: background 0.3s ease;
+    }
 
-        .tag {
-            background: #009736;
-            color: #FFFFFF;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
+    .btn-primary {
+      background: #dc2626;
+      color: #fff;
+    }
 
-        .project-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    .btn-primary:hover {
+      background: #b91c1c;
+    }
 
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .btn-secondary {
+      background: #fff;
+      border: 1px solid #dc2626;
+      color: #dc2626;
+    }
 
-        .btn-primary {
-            background: #EE2A35;
-            color: #FFFFFF;
-        }
-
-        .btn-primary:hover {
-            background: #009736;
-        }
-
-        .btn-secondary {
-            background: #FFFFFF;
-            color: #EE2A35;
-            border: 1px solid #EE2A35;
-        }
-
-        .btn-secondary:hover {
-            background: #EE2A35;
-            color: #FFFFFF;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .add-project-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #EE2A35;
-            border: none;
-            color: #FFFFFF;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(238, 42, 53, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .add-project-btn:hover {
-            background: #009736;
-            transform: scale(1.1);
-        }
-
-        .add-project-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: #FFFFFF;
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .close {
-            color: #EE2A35;
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: -20px;
-        }
-
-        .close:hover {
-            color: #009736;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #000000;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #EE2A35;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #009736;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-links {
-                flex-direction: column;
-            }
-        }
-    </style>
+    .btn-secondary:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
     <div class="container">
@@ -505,59 +344,7 @@
         </section>
     </div>
 
-    <!-- Add Project Button -->
-    <button class="add-project-btn" onclick="openModal()">+</button>
 
-    <!-- Modal for Adding New Project -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Add New Project</h2>
-            <form id="projectForm" onsubmit="addProject(event)">
-                <div class="form-group">
-                    <label for="projectTitle">Project Title</label>
-                    <input type="text" id="projectTitle" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="projectSemester">Semester</label>
-                    <input type="text" id="projectSemester" placeholder="e.g., Fall 2023" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="projectCourse">Course</label>
-                    <input type="text" id="projectCourse" placeholder="e.g., CS 4820" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="projectDescription">Description</label>
-                    <textarea id="projectDescription" required></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="projectTags">Tags (comma-separated)</label>
-                    <input type="text" id="projectTags" placeholder="Python, Machine Learning, Data Science">
-                </div>
-                
-                <div class="form-group">
-                    <label for="reportLink">Report Link</label>
-                    <input type="url" id="reportLink" placeholder="https://...">
-                </div>
-                
-                <div class="form-group">
-                    <label for="posterLink">Poster Link</label>
-                    <input type="url" id="posterLink" placeholder="https://...">
-                </div>
-                
-                <div class="form-group">
-                    <label for="codeLink">Code/Demo Link</label>
-                    <input type="url" id="codeLink" placeholder="https://...">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Add Project</button>
-            </form>
-        </div>
-    </div>
 
     <script>
         // Projects data storage
